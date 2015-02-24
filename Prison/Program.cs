@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Prison
+﻿namespace Prison
 {
 	class Program
 	{
 		static void Main(string[] args)
 		{
+			var prison = new Prison();
+			prison.Initialize();
 		}
 	}
 }
