@@ -9,7 +9,7 @@ namespace Prison
 		public const int PrisonerCount = 100;
 		public const int NumbersOfAttemptsToOpenBox = PrisonerCount/2;
 
-		private readonly Box[] _boxes;
+		private Box[] _boxes;
 
 		public Prison()
 		{
@@ -23,27 +23,13 @@ namespace Prison
 
 		public void Initialize()
 		{
-			var numbers = new bool[PrisonerCount];
+			for (var i = 0; i < _boxes.Length; i++)
+			{
+				_boxes[i].PrisonerId = i;
+			}
 
 			var random = new Random((int)DateTime.Now.Ticks);
-
-			foreach (var box in _boxes)
-			{
-				int? number = null;
-
-				while(number == null)
-				{
-					var randomNumber = random.Next(PrisonerCount);
-
-					if (numbers[randomNumber] == false)
-					{
-						numbers[randomNumber] = true;
-						number = randomNumber;
-					}
-				}
-
-				box.PrisonerId = number.Value;
-			}
+			_boxes = _boxes.OrderBy(b => random.Next()).ToArray();
 		}
 
 		public List<List<Box>> GetCircles()
